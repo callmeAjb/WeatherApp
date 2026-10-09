@@ -1,15 +1,27 @@
 import Search from "./mycomponents/search"
 import Display from "./mycomponents/display"
+import TestingApiG from "./mycomponents/Testing"
 import React, { useState } from 'react';
  
 function App() {
-   const [weather, setWeather] = useState(null);
-  const [Loading, setLoading] = useState(false);
+
+  function handleSearch(data) {
+	setWeather(data)
+}
+
+
+  
+  const [weather, setWeather] = useState(null);
+  const [status, setStatus] = useState("idle");
   return (
     <div>
+
+      <TestingApiG/>
+
+      
       <h1>My Weather App</h1>
-      <Search setWeather = {setWeather} setLoading = {setLoading}/>
-      <Display weather = {weather} Loading = {Loading}/>
+      <Search onSearch = {handleSearch} setStatus = {setStatus}/>
+      <Display weather = {weather} status = {status}/>
     
     </div>
   )

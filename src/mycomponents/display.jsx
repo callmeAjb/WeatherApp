@@ -1,32 +1,35 @@
-function Display({ weather, Loading }) {
+function Display({ weather, status }) {
 
-if (Loading) {
+if (status === "idle") {
       
-      return (<p>loading....</p>) ;
+      return (<h2>enter city name</h2>) ;
 }
+  if (status === "loading") {
+	return (<p>loading....</p>)
+};
+  if (status === "error") {
+	return (<p>unable to fetch data</p>)
+};
   
-  if (!weather) {
-    return;
-  } else {
-    
-
+  
+  if (weather) {
     return (
       <div>
-        <h3>Temperature🌡️:{weather.current_condition[0].temp_C}°C</h3>
-        <h3>Humidity💧: {weather.current_condition[0].humidity}%</h3>
+        <h3>Temperature🌡️:{weather.weatherinfo.current.temperature_2m}°C</h3>
+        <h3>Humidity💧: {weather.weatherinfo.current.relative_humidity_2m}%</h3>
+    <h3> Description🔎: {weather.weatherinfo.current.weather_code}         </h3>          <h3>City📍: {weather.locationinfo.results[0].name}</h3>          <h3>State: {weather.locationinfo.results[0].admin1}</h3>
+        <h3>LGA: {weather.locationinfo.results[0].admin2}</h3>
+        <h3>Country🗺️: {weather.locationinfo.results[0].country}</h3>     
+        
+         
 
-        <h3>
-          Description🔎: {weather.current_condition[0].weatherDesc[0].value}
-        </h3>
-
-        <h3>City📍: {weather.nearest_area[0].areaName[0].value}</h3>
-
-        <h3>State: {weather.nearest_area[0].region[0].value}</h3>
-
-        <h3>Country🗺️: {weather.nearest_area[0].country[0].value}</h3>
-      </div>
+         </div>
     );
-  }
+  } 
+
+
+
+  
 }
 
 export default Display;
